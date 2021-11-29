@@ -1,7 +1,9 @@
 import { Button, Typography } from "@material-ui/core";
 import { Box } from "@material-ui/system";
 import "./styles.scss";
+import { useNavigate } from "react-router-dom";
 export default function ConfirmationModal({ showModal, setShowModal, value }) {
+  const navigate = useNavigate();
   return (
     <div className={showModal ? "container visible" : "container"}>
       <div className="content">
@@ -12,7 +14,10 @@ export default function ConfirmationModal({ showModal, setShowModal, value }) {
           <Button variant="outlined" onClick={() => setShowModal(false)}>
             Cancel
           </Button>
-          <Button variant="outlined" onClick={() => setShowModal(false)}>
+          <Button
+            variant="outlined"
+            onClick={() => navigate("/quiz", { state: value })}
+          >
             Start!
           </Button>
         </Box>

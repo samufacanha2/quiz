@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export default api = axios.create({
-  baseURL: "http://localhost:3000/",
+const api = axios.create({
+  baseURL: "https://opentdb.com",
   timeout: 5000,
 });
+export default api;
