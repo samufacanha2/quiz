@@ -1,0 +1,27 @@
+.container {
+  position: fixed;
+  display: none;
+  z-index: 1;
+}
+.visible {
+  display: block;
+}
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 5px;
+  height: 20vh;
+  width: 60vw;
+  padding: 20px;
+  box-shadow: 0 0 10px #000;
+  z-index: 10;
+}
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  filter: opacity(0.5);
+}
