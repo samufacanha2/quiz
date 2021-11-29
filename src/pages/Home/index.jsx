@@ -24,7 +24,7 @@ export default function Home() {
             alignItems: "center",
             justifyContent: "center",
             height: "100vh",
-            backgroundColor: "#efbbef",
+            backgroundColor: "#33b3ac",
           }}
         >
           <Container
@@ -33,7 +33,7 @@ export default function Home() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#efefef",
+              backgroundColor: "#e9fff8",
               padding: "1rem",
               borderRadius: "1rem",
             }}
@@ -58,6 +58,7 @@ export default function Home() {
               variant="contained"
               sx={{ marginTop: "2rem" }}
               size="large"
+              disabled={value <= 0}
               onClick={() => setShowModal(true)}
             >
               Start

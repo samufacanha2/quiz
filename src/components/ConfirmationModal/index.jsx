@@ -10,12 +10,12 @@ export default function ConfirmationModal({ showModal, setShowModal, value }) {
         <Typography align="center" variant="h3">
           Do you want to answer {value} questions?
         </Typography>
-        <Box justifyContent="space-between">
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Button variant="outlined" onClick={() => setShowModal(false)}>
             Cancel
           </Button>
           <Button
-            variant="outlined"
+            variant="contained"
             onClick={() => navigate("/quiz", { state: value })}
           >
             Start!
