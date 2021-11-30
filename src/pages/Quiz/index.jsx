@@ -1,8 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 
-import api from "../../services/api.js";
-import { useLocation } from "react-router";
 import { Box, boxSizing } from "@material-ui/system";
 import {
   Button,
@@ -16,60 +14,101 @@ import {
   RadioGroup,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-
+import SubmitModal from "../../components/SubmitModal";
 export default function Quiz() {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const [questions, setQuestions] = React.useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const questions = JSON.parse(localStorage.getItem("questions"));
+
+  const initialState = () => {
+    let a = [];
+    for (let i = 0; i < questions.length; i++) {
+      a.push({
+        index: i,
+      });
+    }
+    return a;
+  };
+  const [selectedAnswers, setSelectedAnswers] = React.useState(initialState());
+
   useEffect(() => {
-    api.get(`api.php?amount=${state}`).then((res) => {
-      setQuestions(res.data.results);
-      console.log(res.data.results);
-    });
-  }, []);
-
+    console.log(selectedAnswers);
+  }, [selectedAnswers]);
   return (
-    <Stack direction="column">
-      {questions.map((question) => (
-        <Box
-          key={question.id}
-          sx={{
-            width: "90vw",
-            margin: " 2rem auto",
-            backgroundColor: "#cdd8e4",
-            borderRadius: "1rem",
-            padding: "1rem",
-            boxSizing: "border-box",
-          }}
-        >
-          <FormControl component="fieldset">
-            <FormLabel component="legend" sx={{ fontSize: "1.8rem" }}>
-              {question.question} <br />
-              <Typography variant="h8" sx={{ fontSize: "1.2rem" }}>
-                Catergory: {question.category}
-              </Typography>
-            </FormLabel>
+    <>
+      <SubmitModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        selectedAnswers={selectedAnswers}
+      />
+      <Stack direction="column">
+        {questions.map((question, qindex) => {
+          let questionsBuffer = [
+            { label: question.correct_answer, value: "correct" },
+          ];
+          question.incorrect_answers.forEach((answer) => {
+            questionsBuffer.push({ label: answer, value: "incorrect" });
+          });
 
-            <RadioGroup name="radio-buttons-group">
-              <FormControlLabel
-                value="correct"
-                control={<Radio />}
-                label={question.correct_answer}
-              />
-              {question.incorrect_answers.map((answer, index) => (
-                <FormControlLabel
-                  value={`incorrect${index}`}
-                  control={<Radio />}
-                  label={answer}
-                />
-              ))}
-            </RadioGroup>
-          </FormControl>
+          const orderedAnswers = questionsBuffer.sort((a, b) => {
+            return a.label.localeCompare(b.label);
+          });
+
+          return (
+            <Box
+              key={question.id}
+              sx={{
+                width: "90vw",
+                margin: " 2rem auto",
+                backgroundColor: "#cdd8e4",
+                borderRadius: "1rem",
+                padding: "1rem",
+                boxSizing: "border-box",
+              }}
+            >
+              <FormControl component="fieldset">
+                <FormLabel component="legend" sx={{ fontSize: "1.8rem" }}>
+                  {question.question} <br />
+                  <Typography variant="h8" sx={{ fontSize: "1.2rem" }}>
+                    Catergory: {question.category}
+                  </Typography>
+                </FormLabel>
+
+                <RadioGroup name="radio-buttons-group">
+                  {orderedAnswers.map((answer, index) => (
+                    <FormControlLabel
+                      key={index}
+                      value={`${answer.value}${index}`}
+                      control={<Radio />}
+                      label={answer.label}
+                      onChange={(e) => {
+                        setSelectedAnswers((selectedAnswers) =>
+                          selectedAnswers.map((selectedAnswer) => {
+                            if (selectedAnswer.index == qindex) {
+                              return {
+                                index: qindex,
+                                value: e.target.value.slice(0, -1),
+                              };
+                            } else return selectedAnswer;
+                          })
+                        );
+                      }}
+                    />
+                  ))}
+                </RadioGroup>
+              </FormControl>
+            </Box>
+          );
+        })}
+        <Box display="flex" justifyContent="space-around">
+          <Button variant="outlined" onClick={() => navigate("/")}>
+            Home
+          </Button>
+          <Button variant="contained" onClick={() => setShowModal(true)}>
+            Submit
+          </Button>
         </Box>
-      ))}
-      <Button variant="outlined" onClick={() => navigate("/")}>
-        Home
-      </Button>
-    </Stack>
+      </Stack>
+    </>
   );
 }

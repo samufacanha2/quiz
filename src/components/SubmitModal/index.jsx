@@ -4,26 +4,36 @@ import "./styles.scss";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api.js";
 
-export default function ConfirmationModal({ showModal, setShowModal, value }) {
+export default function ConfirmationModal({
+  showModal,
+  setShowModal,
+  selectedAnswers,
+}) {
   const navigate = useNavigate();
-  const generateQuiz = () => {
-    api.get(`api.php?amount=${value}`).then((res) => {
-      localStorage.setItem("questions", JSON.stringify(res.data.results));
-      navigate("/quiz");
-    });
-  };
   return (
     <div className={showModal ? "container visible" : "container"}>
       <div className="content">
         <Typography align="center" variant="h3">
-          Do you want to answer {value} questions?
+          {selectedAnswers
+            .map((answer) => answer.value)
+            .map((isFilled, index) => {
+              console.log(isFilled);
+              return (
+                !isFilled && (
+                  <Typography align="center" variant="h3">
+                    You have not answered question {index + 1},
+                  </Typography>
+                )
+              );
+            })}
+          do you want to proceed?
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Button variant="outlined" onClick={() => setShowModal(false)}>
             Cancel
           </Button>
-          <Button variant="contained" onClick={() => generateQuiz()}>
-            Start!
+          <Button variant="contained" onClick={() => {}}>
+            Submit
           </Button>
         </Box>
       </div>

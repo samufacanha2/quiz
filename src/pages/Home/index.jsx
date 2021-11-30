@@ -16,7 +16,14 @@ export default function Home() {
         setShowModal={setShowModal}
         value={value}
       />
-      <Box sx={{ width: "100vw", backgroundColor: "#121212" }}>
+      <Box
+        sx={{
+          width: "100vw",
+          backgroundImage:
+            "url(https://motionarray.imgix.net/preview-317818-pztuVWhnDT-high_0008.jpg)",
+          backgroundSize: "cover",
+        }}
+      >
         <Container
           sx={{
             display: "flex",
@@ -24,7 +31,7 @@ export default function Home() {
             alignItems: "center",
             justifyContent: "center",
             height: "100vh",
-            backgroundColor: "#33b3ac",
+            backgroundColor: "#1f0d85",
           }}
         >
           <Container
@@ -33,7 +40,7 @@ export default function Home() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#e9fff8",
+              backgroundColor: "#c1ccfd",
               padding: "1rem",
               borderRadius: "1rem",
             }}
@@ -51,6 +58,9 @@ export default function Home() {
               label="Questions"
               defaultValue={0}
               onChange={(e) => {
+                if (e.target.value > 50) {
+                  e.target.value = 50;
+                }
                 setValue(e.target.value);
               }}
             />
