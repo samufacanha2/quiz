@@ -1,3 +1,47 @@
+# App Overview
+
+
+## Libraries and Technologies
+
+ The Quiz App was built using the React javascript library, most of the styled components were picked from the Material-UI library, the API consumption was made utilizing axios, and the navigation using react-router.
+
+ <br/>
+
+## The Quiz App Functionalities
+
+The application is a simple quiz that consumes the "Open Trivia DB" API.
+
+<br/>
+
+    Functionalities already implemented:
+
+    - Choose ammount of questions
+    - API consumption (axios)
+    - Basic interface (Material-UI)
+    - Save reports in local storage, for later access
+    - See previous reports, listed in Home page
+    - Routing between Home page, Quiz page and Reports page
+
+    Functionalities to implement:
+
+    - Responsiveness
+    - Add optional input for user name in homepage
+    - Better UI
+
+<br/>
+
+# Link to deployed version (vercel)
+
+[https://quiz-s.vercel.app/](https://quiz-s.vercel.app/)
+----------
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
