@@ -16,7 +16,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 20px;
   min-height: 20vh;
   width: 60vw;
   padding: 20px;
@@ -28,4 +28,10 @@
   height: 100vh;
   background-color: #000;
   filter: opacity(0.5);
+}
+@media screen and (max-width: 600px) {
+  .content {
+    width: 70vw;
+    height: 60vh;
+  }
 }

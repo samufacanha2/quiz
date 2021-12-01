@@ -14,7 +14,7 @@ export default function ConfirmationModal({ showModal, setShowModal, value }) {
   };
   return (
     <div className={showModal ? "container visible" : "container"}>
-      <div className="content">
+      <div className="content-confirmation">
         <Typography align="center" variant="h3">
           Do you want to answer {value} questions?
         </Typography>

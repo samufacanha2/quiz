@@ -6,7 +6,7 @@
 .visible {
   display: block;
 }
-.content {
+.content-confirmation {
   display: flex;
 
   flex-direction: column;
@@ -16,11 +16,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 20px;
   height: 20vh;
   width: 60vw;
   padding: 20px;
-  box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.575);
   z-index: 10;
 }
 .background {
@@ -28,4 +28,10 @@
   height: 100vh;
   background-color: #000;
   filter: opacity(0.5);
+}
+@media screen and (max-width: 600px) {
+  .content-confirmation {
+    width: 70vw;
+    height: 60vh;
+  }
 }

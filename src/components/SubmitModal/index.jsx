@@ -27,7 +27,7 @@ export default function SubmitModal({
     <div className={showModal ? "container visible" : "container"}>
       <div className="content">
         {notFull ? (
-          <Typography align="center" variant="h3">
+          <Typography align="center" variant="h3" sx={{ fontSize: "2rem" }}>
             You have unanswered question(s)
             {isFilledAnswers.map((isFilled, index) => {
               console.log(isFilled);

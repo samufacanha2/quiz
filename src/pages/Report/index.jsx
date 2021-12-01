@@ -14,19 +14,23 @@ import {
   RadioGroup,
 } from "@material-ui/core";
 import SubmitModal from "../../components/SubmitModal";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useNavigate } from "react-router-dom";
+
 export default function Quiz() {
   const navigate = useNavigate();
   const [, , reportName] = window.location.pathname.split("/");
   const [showModal, setShowModal] = useState(false);
   const report = JSON.parse(localStorage.getItem(reportName));
+  const mediaQuery = useMediaQuery("(min-width:600px)");
+  console.log(mediaQuery);
   return (
     <>
       <Box display="flex">
         <Typography
           variant="h8"
           sx={{
-            fontSize: "1.5rem",
+            fontSize: !mediaQuery ? "1 rem" : "1.5rem",
             textAlign: "center",
             width: "40vw",
             margin: " 2rem auto",
@@ -46,7 +50,7 @@ export default function Quiz() {
         <Typography
           variant="h8"
           sx={{
-            fontSize: "1.5rem",
+            fontSize: !mediaQuery ? "1 rem" : "1.5rem",
             textAlign: "center",
             width: "40vw",
             margin: " 2rem auto",
