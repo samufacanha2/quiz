@@ -7,7 +7,7 @@ import api from "../../services/api.js";
 export default function ConfirmationModal({ showModal, setShowModal, value }) {
   const navigate = useNavigate();
   const generateQuiz = () => {
-    api.get(`api.php?amount=${value}`).then((res) => {
+    api.get(`api.php?amount=${value}&encode=url3986`).then((res) => {
       localStorage.setItem("questions", JSON.stringify(res.data.results));
       navigate("/quiz");
     });

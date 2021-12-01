@@ -40,6 +40,7 @@ export default function Quiz() {
         showModal={showModal}
         setShowModal={setShowModal}
         selectedAnswers={selectedAnswers}
+        questions={questions}
       />
       <Stack direction="column">
         {questions.map((question, qindex) => {
@@ -68,9 +69,9 @@ export default function Quiz() {
             >
               <FormControl component="fieldset">
                 <FormLabel component="legend" sx={{ fontSize: "1.8rem" }}>
-                  {question.question} <br />
+                  {decodeURIComponent(question.question)} <br />
                   <Typography variant="h8" sx={{ fontSize: "1.2rem" }}>
-                    Catergory: {question.category}
+                    Catergory: {decodeURIComponent(question.category)}
                   </Typography>
                 </FormLabel>
 
@@ -80,7 +81,7 @@ export default function Quiz() {
                       key={index}
                       value={`${answer.value}${index}`}
                       control={<Radio />}
-                      label={answer.label}
+                      label={decodeURIComponent(answer.label)}
                       onChange={(e) => {
                         setSelectedAnswers((selectedAnswers) =>
                           selectedAnswers.map((selectedAnswer) => {
@@ -88,6 +89,7 @@ export default function Quiz() {
                               return {
                                 index: qindex,
                                 value: e.target.value.slice(0, -1),
+                                label: decodeURIComponent(answer.label),
                               };
                             } else return selectedAnswer;
                           })
@@ -100,11 +102,23 @@ export default function Quiz() {
             </Box>
           );
         })}
-        <Box display="flex" justifyContent="space-around">
-          <Button variant="outlined" onClick={() => navigate("/")}>
+        <Box
+          display="flex"
+          justifyContent="space-around"
+          sx={{ marginBottom: 10 }}
+        >
+          <Button
+            variant="outlined"
+            onClick={() => navigate("/")}
+            sx={{ fontSize: 25 }}
+          >
             Home
           </Button>
-          <Button variant="contained" onClick={() => setShowModal(true)}>
+          <Button
+            variant="contained"
+            onClick={() => setShowModal(true)}
+            sx={{ fontSize: 25 }}
+          >
             Submit
           </Button>
         </Box>
