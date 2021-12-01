@@ -30,15 +30,13 @@ The application is a simple quiz that consumes the "Open Trivia DB" API.
 
 <br/>
 
-# Link to deployed version (vercel)
+# Link to deployed version (Vercel)
 
 [https://quiz-s.vercel.app/](https://quiz-s.vercel.app/)
 ----------
+----------
 
-<br/>
-<br/>
-<br/>
-<br/>
+
 <br/>
 <br/>
 
