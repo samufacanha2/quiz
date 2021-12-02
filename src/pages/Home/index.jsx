@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import "./styles.scss";
 import { Box } from "@material-ui/system";
+import Particles from "react-tsparticles";
+import ParticlesParams from "../../assets/particles.json";
 import {
   Button,
   TextField,
@@ -21,6 +23,7 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [previousReports, setPreviousReports] = useState([]);
   const mediaQuery = useMediaQuery("(min-width:600px)");
+
   useEffect(() => {
     let previousBuffer = [];
     for (var i = 0, len = localStorage.length; i < len; ++i) {
@@ -46,19 +49,17 @@ export default function Home() {
       <Box
         sx={{
           width: "100vw",
-          backgroundImage:
-            "url(https://motionarray.imgix.net/preview-317818-pztuVWhnDT-high_0008.jpg)",
           backgroundSize: "cover",
         }}
       >
         <Container
+          maxWidth="100%"
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             height: "100vh",
-            backgroundColor: "#1f0d85",
           }}
         >
           <Container
@@ -67,18 +68,29 @@ export default function Home() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#c1ccfd",
+              backgroundColor: "#7bb1e4",
               padding: "1rem",
               borderRadius: "1rem",
             }}
           >
-            <Typography align="center" variant={mediaQuery ? "h1" : "h3"}>
+            <Typography
+              align="center"
+              variant={mediaQuery ? "h1" : "h3"}
+              sx={{
+                fontWeight: "bold",
+                color: "white",
+                textShadow: "2px 2px 2px #000000",
+              }}
+            >
               Quiz Time!!
             </Typography>
             <Typography
               align="center"
               variant={mediaQuery ? "h3" : "h5"}
-              color="#343434"
+              color="#efefef"
+              sx={{
+                textShadow: "1px 1px #000",
+              }}
             >
               Choose how many questions you want to answer
             </Typography>
@@ -91,13 +103,18 @@ export default function Home() {
               onChange={(e) => {
                 if (e.target.value > 50) {
                   e.target.value = 50;
+                } else if (e.target.value < 0) {
+                  e.target.value = 0;
                 }
+
                 setValue(e.target.value);
               }}
             />
             <Button
               variant="contained"
-              sx={{ marginTop: "2rem" }}
+              sx={{
+                marginTop: "2rem",
+              }}
               size="large"
               disabled={value <= 0}
               onClick={() => setShowModal(true)}
@@ -107,7 +124,7 @@ export default function Home() {
           </Container>
 
           {localStorage.length && (
-            <Accordion>
+            <Accordion sx={{ borderRadius: "10px" }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -119,7 +136,11 @@ export default function Home() {
                 <Typography>
                   {previousReports.map((report, index) => {
                     return (
-                      <Link to={`/report/${report.key}`} key={index}>
+                      <Link
+                        to={`/report/${report.key}`}
+                        key={index}
+                        style={{ textDecoration: "none" }}
+                      >
                         <Box
                           sx={{
                             display: "flex",
@@ -129,7 +150,16 @@ export default function Home() {
                             margin: "1rem",
                           }}
                         >
-                          <Typography>
+                          <Typography
+                            sx={{
+                              backgroundColor: "#7bb1e4",
+                              padding: "10px",
+                              borderRadius: "10px",
+                              color: "white",
+                              fontWeight: "bold",
+                              textShadow: "1px 1px 1px #0000006c",
+                            }}
+                          >
                             Relatório -{" "}
                             {new Date(report.report.date).toLocaleString()}
                           </Typography>
@@ -141,6 +171,18 @@ export default function Home() {
               </AccordionDetails>
             </Accordion>
           )}
+          <Particles id="tsparticles" options={ParticlesParams} />
+
+          <Box
+            sx={{
+              height: "100vh",
+              width: "100vw",
+              position: "absolute",
+              backgroundColor: "#07006b",
+              filter: "opacity(0.8)",
+              zIndex: "-2",
+            }}
+          ></Box>
         </Container>
       </Box>
     </>

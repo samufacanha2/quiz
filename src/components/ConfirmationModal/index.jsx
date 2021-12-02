@@ -16,7 +16,7 @@ export default function ConfirmationModal({ showModal, setShowModal, value }) {
     <div className={showModal ? "container visible" : "container"}>
       <div className="content-confirmation">
         <Typography align="center" variant="h3">
-          Do you want to answer {value} questions?
+          Do you want to answer {value} question(s)?
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Button variant="outlined" onClick={() => setShowModal(false)}>
