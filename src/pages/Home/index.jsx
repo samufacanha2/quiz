@@ -123,7 +123,7 @@ export default function Home() {
           </Container>
 
           {!!localStorage.length && (
-            <Accordion sx={{ borderRadius: "10px" }}>
+            <Accordion sx={{ borderRadius: "10px", marginTop: "15px" }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
