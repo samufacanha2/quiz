@@ -3,6 +3,7 @@ import { Box } from "@material-ui/system";
 import "./styles.scss";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api.js";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 export default function SubmitModal({
   showModal,
@@ -11,6 +12,7 @@ export default function SubmitModal({
   questions,
 }) {
   const navigate = useNavigate();
+  const mediaQuery = useMediaQuery("(min-width:600px)");
   const isFilledAnswers = selectedAnswers.map((answer) => answer.value);
   const notFull = isFilledAnswers.includes(undefined);
   const handleSubmit = () => {
@@ -27,7 +29,11 @@ export default function SubmitModal({
     <div className={showModal ? "container visible" : "container"}>
       <div className="content">
         {notFull ? (
-          <Typography align="center" variant="h3" sx={{ fontSize: "2rem" }}>
+          <Typography
+            align="center"
+            variant={mediaQuery ? "h3" : "h5"}
+            sx={{ fontSize: "2rem" }}
+          >
             You have unanswered question(s)
             {isFilledAnswers.map((isFilled, index) => {
               console.log(isFilled);
@@ -36,13 +42,20 @@ export default function SubmitModal({
             do you want to proceed?
           </Typography>
         ) : (
-          <Typography align="center" variant="h3">
+          <Typography align="center" variant={mediaQuery ? "h3" : "h5"}>
             You have answered all the questions. <br />
             do you want to proceed?
           </Typography>
         )}
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="outlined" onClick={() => setShowModal(false)}>
+          <Button
+            variant="outlined"
+            onClick={() => setShowModal(false)}
+            sx={{
+              color: "white",
+              borderColor: "white",
+            }}
+          >
             Cancel
           </Button>
           <Button

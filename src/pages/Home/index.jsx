@@ -62,35 +62,34 @@ export default function Home() {
             height: "100vh",
           }}
         >
+          <Typography
+            align="center"
+            variant={mediaQuery ? "h1" : "h3"}
+            sx={{
+              fontWeight: "bold",
+              color: "#fff",
+              marginBottom: "2rem",
+              textShadow: "2px 2px 2px #000000",
+            }}
+          >
+            Quiz Time!!
+          </Typography>
           <Container
             sx={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#7bb1e4",
+              backgroundColor: "#948CFF",
               padding: "1rem",
               borderRadius: "1rem",
+              width: mediaQuery ? "30%" : "90%",
             }}
           >
             <Typography
               align="center"
-              variant={mediaQuery ? "h1" : "h3"}
-              sx={{
-                fontWeight: "bold",
-                color: "white",
-                textShadow: "2px 2px 2px #000000",
-              }}
-            >
-              Quiz Time!!
-            </Typography>
-            <Typography
-              align="center"
               variant={mediaQuery ? "h3" : "h5"}
-              color="#efefef"
-              sx={{
-                textShadow: "1px 1px #000",
-              }}
+              color="#fff"
             >
               Choose how many questions you want to answer
             </Typography>
@@ -123,7 +122,7 @@ export default function Home() {
             </Button>
           </Container>
 
-          {localStorage.length && (
+          {!!localStorage.length && (
             <Accordion sx={{ borderRadius: "10px" }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

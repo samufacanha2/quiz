@@ -42,7 +42,13 @@ export default function Quiz() {
         selectedAnswers={selectedAnswers}
         questions={questions}
       />
-      <Stack direction="column">
+      <Stack
+        direction="column"
+        sx={{
+          backgroundColor: "#283463",
+          minHeight: "100vh",
+        }}
+      >
         {questions.map((question, qindex) => {
           let questionsBuffer = [
             { label: question.correct_answer, value: "correct" },
@@ -61,16 +67,28 @@ export default function Quiz() {
               sx={{
                 width: "90vw",
                 margin: " 2rem auto",
-                backgroundColor: "#cdd8e4",
+                backgroundColor: "#85ABF7",
                 borderRadius: "1rem",
                 padding: "1rem",
                 boxSizing: "border-box",
               }}
             >
               <FormControl component="fieldset">
-                <FormLabel component="legend" sx={{ fontSize: "1.8rem" }}>
+                <FormLabel
+                  component="legend"
+                  sx={{ fontSize: "1.8rem", color: "white" }}
+                >
                   {decodeURIComponent(question.question)} <br />
-                  <Typography variant="h8" sx={{ fontSize: "1.2rem" }}>
+                  <Typography
+                    variant="h8"
+                    sx={{
+                      fontSize: "1.2rem",
+                      color: "white",
+                      "&. Mui-focused": {
+                        color: "#fff",
+                      },
+                    }}
+                  >
                     Catergory: {decodeURIComponent(question.category)}
                   </Typography>
                 </FormLabel>
@@ -80,7 +98,17 @@ export default function Quiz() {
                     <FormControlLabel
                       key={index}
                       value={`${answer.value}${index}`}
-                      control={<Radio />}
+                      control={
+                        <Radio
+                          sx={{
+                            color: "white",
+                            "&.Mui-checked": {
+                              color: "white",
+                            },
+                          }}
+                        />
+                      }
+                      sx={{ color: "white" }}
                       label={decodeURIComponent(answer.label)}
                       onChange={(e) => {
                         setSelectedAnswers((selectedAnswers) =>
@@ -110,7 +138,7 @@ export default function Quiz() {
           <Button
             variant="outlined"
             onClick={() => navigate("/")}
-            sx={{ fontSize: 25 }}
+            sx={{ fontSize: 25, color: "white", borderColor: "white" }}
           >
             Home
           </Button>

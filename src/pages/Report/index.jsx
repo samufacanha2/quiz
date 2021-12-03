@@ -26,7 +26,7 @@ export default function Quiz() {
   console.log(mediaQuery);
   return (
     <>
-      <Box display="flex">
+      <Box display="flex" sx={{ backgroundColor: "#283463" }}>
         <Typography
           variant="h8"
           sx={{
@@ -34,10 +34,12 @@ export default function Quiz() {
             textAlign: "center",
             width: "40vw",
             margin: " 2rem auto",
-            backgroundColor: "#cdd8e4",
+            height: "7vh",
+            backgroundColor: "#85ABF7",
             borderRadius: "1rem",
             padding: "1rem",
             boxSizing: "border-box",
+            color: "white",
           }}
         >
           Score:
@@ -54,10 +56,11 @@ export default function Quiz() {
             textAlign: "center",
             width: "40vw",
             margin: " 2rem auto",
-            backgroundColor: "#cdd8e4",
+            backgroundColor: "#85ABF7",
             borderRadius: "1rem",
             padding: "1rem",
             boxSizing: "border-box",
+            color: "white",
           }}
         >
           Unanswered:
@@ -68,7 +71,13 @@ export default function Quiz() {
           /{report.selectedAnswers.length}
         </Typography>
       </Box>
-      <Stack direction="column">
+      <Stack
+        direction="column"
+        sx={{
+          backgroundColor: "#283463",
+          minHeight: "calc(93vh - 4rem)",
+        }}
+      >
         {report.questions.map((question, qindex) => {
           const unanswered = report.selectedAnswers[qindex].value === undefined;
           const correct = report.selectedAnswers[qindex].value === "correct";
@@ -78,16 +87,22 @@ export default function Quiz() {
               sx={{
                 width: "90vw",
                 margin: " 2rem auto",
-                backgroundColor: "#cdd8e4",
+                backgroundColor: "#85ABF7",
                 borderRadius: "1rem",
                 padding: "1rem",
                 boxSizing: "border-box",
               }}
             >
               <FormControl component="fieldset">
-                <FormLabel component="legend" sx={{ fontSize: "1.8rem" }}>
+                <FormLabel
+                  component="legend"
+                  sx={{ fontSize: "1.8rem", color: "white" }}
+                >
                   {decodeURIComponent(question.question)} <br />
-                  <Typography variant="h8" sx={{ fontSize: "1.2rem" }}>
+                  <Typography
+                    variant="h8"
+                    sx={{ fontSize: "1.2rem", color: "white" }}
+                  >
                     Catergory: {decodeURIComponent(question.category)}
                   </Typography>
                   <br />
@@ -109,7 +124,16 @@ export default function Quiz() {
                   <FormControlLabel
                     disabled
                     checked
-                    control={<Radio />}
+                    control={
+                      <Radio
+                        sx={{
+                          color: "white",
+                          "&.Mui-disabled": {
+                            color: "white",
+                          },
+                        }}
+                      />
+                    }
                     label={decodeURIComponent(
                       report.selectedAnswers[qindex].label
                     )}
@@ -129,7 +153,16 @@ export default function Quiz() {
 
                     <FormControlLabel
                       disabled
-                      control={<Radio />}
+                      control={
+                        <Radio
+                          sx={{
+                            color: "white",
+                            "&.Mui-disabled": {
+                              color: "white",
+                            },
+                          }}
+                        />
+                      }
                       sx={{ color: "green" }}
                       label={
                         decodeURIComponent(
@@ -151,7 +184,7 @@ export default function Quiz() {
           <Button
             variant="outlined"
             onClick={() => navigate("/")}
-            sx={{ fontSize: 25 }}
+            sx={{ fontSize: 25, color: "white", borderColor: "white" }}
           >
             Home
           </Button>
